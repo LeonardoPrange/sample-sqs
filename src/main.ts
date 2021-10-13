@@ -1,19 +1,17 @@
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions } from '@nestjs/microservices';
-import { AppModule } from './app.module';
+import { CadastroModule } from './cadastro/cadastro.module';
+import { ContratoModule } from './contrato/contratos.module';
 import { MessageService } from './contrato/infrastructure/services/message.service';
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-    AppModule,
-    {
+  const microservice =
+    await NestFactory.createMicroservice<MicroserviceOptions>(ContratoModule, {
       strategy: new MessageService(),
-    },
-  );
-  app.listen();
-  const otherApp = await NestFactory.create(AppModule);
-  await otherApp.listen(3000);
+    });
+  microservice.listen();
+  const app = await NestFactory.create(CadastroModule);
+  await app.listen(3000);
 }
 
-// Make sure to gracefully log any bootstrapping errors
 bootstrap().catch(console.error);
