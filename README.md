@@ -29,33 +29,28 @@
 ## Installation
 
 ```bash
-$ npm install
+$ yarn
 ```
 
 ## Running the app
 
 ```bash
-# development
-$ npm run start
+# on Terminal
 
-# watch mode
-$ npm run start:dev
+# Sobe containers
+$ docker-compose up -d
 
-# production mode
-$ npm run start:prod
-```
+#Entra dentro do container
+$ docker-compose exec localstack bash
 
-## Test
+#Configura AWS (Não é necessário preencher os campos)
+$ aws configure
 
-```bash
-# unit tests
-$ npm run test
+#Cria fila
+$ aws --endpoint-url=http://127.0.0.1:4566 sqs create-queue --queue-name myqueue
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# run
+$ yarn start
 ```
 
 ## Support
