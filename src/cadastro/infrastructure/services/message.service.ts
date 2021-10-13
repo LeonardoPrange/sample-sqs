@@ -47,7 +47,9 @@ export class MessageService {
       });
       return true;
     } catch (error) {
-      throw error;
+      throw new Error(
+        `INFRASTRUCTURE_ERROR: Erro ao enviar mensagem SQS: ${error}`,
+      );
     }
   }
 }
